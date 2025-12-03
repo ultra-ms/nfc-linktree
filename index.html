@@ -40,26 +40,22 @@
   <div class="name" id="name">If you see this, something went wrong.</div>
 
   <script>
-    // Map URL path segments to names shown on the tag
-    const names = {
-      "0000": "An: Niemand",
-      "2564": "An: Daniel",
-      "8383": "An: Silvia",
-      "7457": "An: Torsten",
-    };
+  const names = {
+    "2564": "An: Daniel", // https://ultra-ms.github.io/nfc-linktree/?id=2564
+    "8383": "An: Silvia", // https://ultra-ms.github.io/nfc-linktree/?id=8383
+    "7457": "An: Torsten", // https://ultra-ms.github.io/nfc-linktree/?id=7457
+  };
 
-    const el = document.getElementById("name");
+  const el = document.getElementById("name");
 
-    // Get last non-empty segment of the path, e.g. /tags/0000 -> "For Nobody"
-    const segments = window.location.pathname.split("/").filter(Boolean);
-    const last = segments[segments.length - 1] || "";
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id") || "";
 
-    if (last && names[last]) {
-      el.textContent = names[last];
-    } else {
-      // Fallback text if path not in the list
-      el.textContent = "Fröhliche Weihnachten";
-    }
-  </script>
+  if (id && names[id]) {
+    el.textContent = names[id];
+  } else {
+    el.textContent = "Merry Christmas";
+  }
+</script>
 </body>
 </html>
