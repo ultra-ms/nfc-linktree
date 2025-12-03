@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>NFC Tag</title>
+  <icon rel="icon" href="favicon.png" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #050509;
+      color: #f5f5f5;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .name {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 3s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      0%   { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="name" id="name">If you see this, something went wrong.</div>
+
+  <script>
+    // Map URL path segments to names shown on the tag
+    const names = {
+      "2564": "An: Daniel",
+      "8383": "An: Silvia",
+      "7457": "An: Torsten",
+    };
+
+    const el = document.getElementById("name");
+
+    // Get last non-empty segment of the path, e.g. /tags/anna -> "For Anna"
+    const path = window.location.pathname; // e.g. "/tags/anna"
+    const segments = path.split("/").filter(Boolean);
+    const last = segments[segments.length - 1] || "";
+
+    if (last && names[last]) {
+      el.textContent = names[last];
+    } else {
+      // Fallback text if path not in the list
+      el.textContent = "Fröhliche Weihnachten";
+    }
+  </script>
+</body>
+</html>
