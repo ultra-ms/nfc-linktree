@@ -42,6 +42,7 @@
   <script>
     // Map URL path segments to names shown on the tag
     const names = {
+      "0000": "An: Niemand",
       "2564": "An: Daniel",
       "8383": "An: Silvia",
       "7457": "An: Torsten",
@@ -49,9 +50,8 @@
 
     const el = document.getElementById("name");
 
-    // Get last non-empty segment of the path, e.g. /tags/anna -> "For Anna"
-    const path = window.location.pathname; // e.g. "/tags/anna"
-    const segments = path.split("/").filter(Boolean);
+    // Get last non-empty segment of the path, e.g. /tags/0000 -> "For Nobody"
+    const segments = window.location.pathname.split("/").filter(Boolean);
     const last = segments[segments.length - 1] || "";
 
     if (last && names[last]) {
